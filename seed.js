@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URI = "mongodb+srv://realdots:AapPWozG4qKBncnV@cluster0.0dnl6.mongodb.net/realdots?appName=Cluster0";
+require('dotenv').config({ path: '.env.local' }); // Or just ensure it's passed in environment
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  console.error("Please define the MONGODB_URI environment variable inside .env.local");
+  process.exit(1);
+}
 
 const PropertySchema = new mongoose.Schema({
   title: String,
