@@ -19,13 +19,20 @@ export default function PropertySection({ properties = [], activeFilter = null }
         </div>
 
         {properties.length > 0 ? (
-          <ul className="property-grid">
-            {properties.map((property, idx) => (
+          <>
+            <ul className="property-grid">
+              {properties.slice(0, 6).map((property, idx) => (
               <li key={property._id || idx}>
                 <PropertyCard property={property} />
               </li>
             ))}
-          </ul>
+            </ul>
+            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+              <Link href="/properties" className="btn" style={{ padding: '12px 30px', display: 'inline-block' }}>
+                See More
+              </Link>
+            </div>
+          </>
         ) : (
           <p>No properties found matching your criteria. Try clearing the filter.</p>
         )}
