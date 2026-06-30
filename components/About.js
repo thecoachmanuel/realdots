@@ -8,9 +8,9 @@ export default function About() {
         </figure>
         <div className="about-content">
           <p className="section-subtitle">About Us</p>
-          <h2 className="h2 section-title">The Leading Real Estate Rental Marketplace.</h2>
+          <h2 className="h2 section-title">Your Dedicated Personal Real Estate Expert.</h2>
           <p className="about-text">
-            Over 39,000 people work for us in more than 70 countries all over the This breadth of global coverage, combined with specialist services
+            As an independent real estate professional, I provide dedicated, one-on-one service to help you find your perfect property. Enjoy a personalized, transparent experience tailored entirely to your unique needs.
           </p>
           <ul className="about-list">
             <li className="about-item">
