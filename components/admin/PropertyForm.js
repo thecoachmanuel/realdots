@@ -101,7 +101,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     });
 
     if (res.ok) {
-      router.push('/admin');
+      router.push('/admin/properties');
       router.refresh();
     } else {
       const data = await res.json();
@@ -110,91 +110,92 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     }
   };
 
-  const inputStyle = { padding: '10px', borderRadius: '4px', border: '1px solid #ccc', width: '100%' };
-  const labelStyle = { display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#333' };
-  const groupStyle = { marginBottom: '15px' };
-
   return (
-    <form onSubmit={handleSubmit} style={{ background: 'white', padding: '30px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-      {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
+    <form onSubmit={handleSubmit} className="premium-form">
+      {error && <div style={{ background: '#fef2f2', color: '#b91c1c', padding: '12px', borderRadius: '8px', marginBottom: '24px', border: '1px solid #fca5a5' }}>{error}</div>}
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Title</label>
-          <input type="text" name="title" value={formData.title} onChange={handleChange} required style={inputStyle} />
+      <div className="form-grid-2">
+        <div className="form-group">
+          <label className="form-label">Title</label>
+          <input type="text" name="title" value={formData.title} onChange={handleChange} required className="premium-input" placeholder="e.g. Luxury Duplex in Banana Island" />
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Location</label>
-          <input type="text" name="location" value={formData.location} onChange={handleChange} required style={inputStyle} />
+        <div className="form-group">
+          <label className="form-label">Location</label>
+          <input type="text" name="location" value={formData.location} onChange={handleChange} required className="premium-input" placeholder="e.g. Ikoyi, Lagos" />
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Price</label>
-          <input type="number" name="price" value={formData.price} onChange={handleChange} required style={inputStyle} />
+        <div className="form-group">
+          <label className="form-label">Price (₦)</label>
+          <input type="number" name="price" value={formData.price} onChange={handleChange} required className="premium-input" placeholder="e.g. 5000000" />
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Price Period</label>
-          <select name="pricePeriod" value={formData.pricePeriod} onChange={handleChange} style={inputStyle}>
-            <option value="">None (Sales)</option>
+        <div className="form-group">
+          <label className="form-label">Price Period</label>
+          <select name="pricePeriod" value={formData.pricePeriod} onChange={handleChange} className="premium-input">
+            <option value="">None (For Sale)</option>
             <option value="Month">Month</option>
             <option value="Year">Year</option>
             <option value="One-time">One-time</option>
           </select>
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Primary Image URL</label>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} />
-            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              {uploadingImage ? 'Uploading...' : 'Upload'}
-              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'image')} />
+        
+        <div className="form-group">
+          <label className="form-label">Primary Image URL</label>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <input type="text" name="image" value={formData.image} onChange={handleChange} required className="premium-input" placeholder="https://..." />
+            <label className="premium-btn btn-outline" style={{ whiteSpace: 'nowrap', margin: 0 }}>
+              <ion-icon name={uploadingImage ? "sync-outline" : "cloud-upload-outline"}></ion-icon> {uploadingImage ? '...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'image')} disabled={uploadingImage} />
             </label>
           </div>
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Extra Images (Comma separated URLs)</label>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <input type="text" name="images" value={formData.images} onChange={handleChange} style={inputStyle} placeholder="/images/prop2.jpg, /images/prop3.jpg" />
-            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              {uploadingImage ? 'Uploading...' : 'Upload'}
-              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'images')} />
+        <div className="form-group">
+          <label className="form-label">Extra Images (Comma separated URLs)</label>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <input type="text" name="images" value={formData.images} onChange={handleChange} className="premium-input" placeholder="url1, url2..." />
+            <label className="premium-btn btn-outline" style={{ whiteSpace: 'nowrap', margin: 0 }}>
+              <ion-icon name={uploadingImage ? "sync-outline" : "cloud-upload-outline"}></ion-icon> {uploadingImage ? '...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'images')} disabled={uploadingImage} />
             </label>
           </div>
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Badge</label>
-          <select name="badge" value={formData.badge} onChange={handleChange} style={inputStyle}>
+
+        <div className="form-group">
+          <label className="form-label">Status Badge</label>
+          <select name="badge" value={formData.badge} onChange={handleChange} className="premium-input">
             <option value="For Rent">For Rent</option>
             <option value="For Sales">For Sales</option>
           </select>
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Bedrooms</label>
-          <input type="number" name="bedrooms" value={formData.bedrooms} onChange={handleChange} required style={inputStyle} />
-        </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Bathrooms</label>
-          <input type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange} required style={inputStyle} />
-        </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Square Ft</label>
-          <input type="number" name="squareFt" value={formData.squareFt} onChange={handleChange} required style={inputStyle} />
+        <div className="form-group" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+          <div>
+            <label className="form-label">Beds</label>
+            <input type="number" name="bedrooms" value={formData.bedrooms} onChange={handleChange} required className="premium-input" />
+          </div>
+          <div>
+            <label className="form-label">Baths</label>
+            <input type="number" name="bathrooms" value={formData.bathrooms} onChange={handleChange} required className="premium-input" />
+          </div>
+          <div>
+            <label className="form-label">Sq Ft</label>
+            <input type="number" name="squareFt" value={formData.squareFt} onChange={handleChange} required className="premium-input" />
+          </div>
         </div>
       </div>
 
-      <div style={groupStyle}>
-        <label style={labelStyle}>Description</label>
-        <textarea name="description" value={formData.description} onChange={handleChange} required rows="4" style={{...inputStyle, resize: 'vertical'}} />
+      <div className="form-group">
+        <label className="form-label">Description</label>
+        <textarea name="description" value={formData.description} onChange={handleChange} required rows="4" className="premium-input" style={{ resize: 'vertical' }} placeholder="Describe the property..." />
       </div>
 
-      <div style={groupStyle}>
-        <label style={labelStyle}>Amenities</label>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+      <div className="form-group">
+        <label className="form-label" style={{ marginBottom: '16px' }}>Amenities</label>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
           {['Parking Space', 'Swimming Pool', 'Private Security', 'Medical Center', 'Library Area', 'King Size Beds', 'Smart Homes', "Kid’s Playland"].map(amenity => (
-            <label key={amenity} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <label key={amenity} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '14px', color: 'var(--admin-text-main)' }}>
               <input 
                 type="checkbox" 
                 checked={formData.amenities.includes(amenity)} 
                 onChange={() => handleAmenityChange(amenity)} 
+                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
               />
               {amenity}
             </label>
@@ -202,9 +203,19 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
         </div>
       </div>
 
-      <button type="submit" disabled={loading} style={{ padding: '12px 24px', background: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '16px' }}>
-        {loading ? 'Saving...' : isEdit ? 'Update Property' : 'Add Property'}
-      </button>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '32px' }}>
+        <button type="submit" disabled={loading} className="premium-btn btn-primary" style={{ minWidth: '150px' }}>
+          {loading ? (
+            <><ion-icon name="sync-outline" className="spin"></ion-icon> Saving...</>
+          ) : (
+            <><ion-icon name="save-outline"></ion-icon> {isEdit ? 'Update Property' : 'Add Property'}</>
+          )}
+        </button>
+      </div>
+      <style jsx>{`
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+      `}</style>
     </form>
   );
 }

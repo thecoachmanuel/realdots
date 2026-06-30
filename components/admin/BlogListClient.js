@@ -18,40 +18,59 @@ export default function BlogListClient({ blogs }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '24px', color: '#2c3e50' }}>Manage Blogs</h1>
-        <Link href="/admin/blogs/new" style={{ padding: '10px 20px', background: '#27ae60', color: 'white', textDecoration: 'none', borderRadius: '4px' }}>
-          Add New Blog
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <div>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--admin-text-main)', margin: '0 0 8px 0' }}>Manage Blogs</h1>
+          <p style={{ color: 'var(--admin-text-muted)', margin: 0 }}>Create and organize your latest news and articles.</p>
+        </div>
+        <Link href="/admin/blogs/new" className="premium-btn btn-primary">
+          <ion-icon name="add-circle-outline"></ion-icon> Write New Blog
         </Link>
       </div>
 
-      <div className="admin-table-container" style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="premium-table-container">
+        <table className="premium-table">
           <thead>
-            <tr style={{ background: '#ecf0f1', color: '#34495e' }}>
-              <th style={{ padding: '15px' }}>Title</th>
-              <th style={{ padding: '15px' }}>Category</th>
-              <th style={{ padding: '15px' }}>Date</th>
-              <th style={{ padding: '15px', textAlign: 'right' }}>Actions</th>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Published On</th>
+              <th style={{ textAlign: 'right' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {blogs.map(blog => (
-              <tr key={blog._id} style={{ borderBottom: '1px solid #ecf0f1' }}>
-                <td style={{ padding: '15px' }}>
-                  <strong>{blog.title}</strong>
+              <tr key={blog._id}>
+                <td>
+                  <div style={{ fontWeight: '600', color: 'var(--admin-text-main)' }}>{blog.title}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--admin-text-muted)', marginTop: '4px' }}>By {blog.author?.name || 'Admin'}</div>
                 </td>
-                <td style={{ padding: '15px' }}>{blog.category}</td>
-                <td style={{ padding: '15px' }}>{new Date(blog.createdAt).toLocaleDateString()}</td>
-                <td style={{ padding: '15px', textAlign: 'right' }}>
-                  <Link href={`/admin/blogs/${blog._id}`} style={{ marginRight: '10px', color: '#3498db', textDecoration: 'none' }}>Edit</Link>
-                  <button onClick={() => handleDelete(blog._id)} style={{ background: 'none', border: 'none', color: '#e74c3c', cursor: 'pointer' }}>Delete</button>
+                <td>
+                  <span className="admin-badge badge-blue">
+                    {blog.category}
+                  </span>
+                </td>
+                <td>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--admin-text-muted)' }}>
+                    <ion-icon name="calendar-outline"></ion-icon> {new Date(blog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </div>
+                </td>
+                <td style={{ textAlign: 'right' }}>
+                  <Link href={`/admin/blogs/${blog._id}`} className="action-icon-btn" title="Edit">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </Link>
+                  <button onClick={() => handleDelete(blog._id)} className="action-icon-btn delete" title="Delete">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
                 </td>
               </tr>
             ))}
             {blogs.length === 0 && (
               <tr>
-                <td colSpan="4" style={{ padding: '30px', textAlign: 'center', color: '#7f8c8d' }}>No blogs found.</td>
+                <td colSpan="4" style={{ padding: '48px', textAlign: 'center', color: 'var(--admin-text-muted)' }}>
+                  <ion-icon name="newspaper-outline" style={{ fontSize: '48px', marginBottom: '16px', opacity: 0.5 }}></ion-icon>
+                  <p>No blogs published yet. Start writing!</p>
+                </td>
               </tr>
             )}
           </tbody>

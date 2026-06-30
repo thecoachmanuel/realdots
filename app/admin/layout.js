@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import './admin.css';
 
 export default function AdminLayout({ children }) {
   const router = useRouter();
@@ -25,14 +26,14 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f4f5f7', fontFamily: 'sans-serif' }}>
+    <div className="admin-layout-wrapper">
       
       {/* Mobile Header */}
-      <div className="admin-mobile-header">
-        <div style={{ fontSize: '20px', fontWeight: 'bold' }}>RealDots Admin</div>
+      <div className="admin-mobile-header" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--admin-sidebar-bg)', color: 'white' }}>
+        <div style={{ fontSize: '20px', fontWeight: '800' }}>RealDots<span style={{ color: 'var(--admin-primary)' }}>.</span> Admin</div>
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-          style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '24px', cursor: 'pointer' }}
+          style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '28px', cursor: 'pointer', display: 'flex' }}
         >
           <ion-icon name={isMobileMenuOpen ? "close-outline" : "menu-outline"}></ion-icon>
         </button>
@@ -40,60 +41,42 @@ export default function AdminLayout({ children }) {
 
       <div style={{ display: 'flex', flex: 1, position: 'relative' }}>
         {/* Sidebar */}
-        <aside style={{ 
-          width: '250px', 
-          background: '#2c3e50', 
-          color: 'white', 
-          flexDirection: 'column',
-          position: 'absolute',
-          top: 0,
-          left: isMobileMenuOpen ? 0 : '-250px',
-          bottom: 0,
-          zIndex: 50,
-          transition: 'left 0.3s ease',
-        }}
-        className="admin-sidebar"
-        >
-          <div style={{ padding: '20px', fontSize: '20px', fontWeight: 'bold', borderBottom: '1px solid #34495e', display: 'none' }} className="admin-sidebar-header">
-            RealDots Admin
+        <aside className={`admin-sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="admin-sidebar-header">
+            RealDots<span style={{ color: 'var(--admin-primary)' }}>.</span>
           </div>
-          <nav style={{ flex: 1, padding: '20px 0', overflowY: 'auto' }}>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <nav style={{ flex: 1, overflowY: 'auto' }}>
+            <ul className="admin-nav-list">
               <li>
-                <Link href="/admin" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin' ? '#34495e' : 'transparent' }}>
-                  Dashboard
+                <Link href="/admin" className={`admin-nav-link ${pathname === '/admin' ? 'active' : ''}`}>
+                  <ion-icon name="grid-outline"></ion-icon> Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/admin/properties" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin/properties' ? '#34495e' : 'transparent' }}>
-                  Manage Properties
+                <Link href="/admin/properties" className={`admin-nav-link ${pathname === '/admin/properties' ? 'active' : ''}`}>
+                  <ion-icon name="home-outline"></ion-icon> Properties
                 </Link>
               </li>
               <li>
-                <Link href="/admin/properties/new" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin/properties/new' ? '#34495e' : 'transparent' }}>
-                  Add Property
+                <Link href="/admin/messages" className={`admin-nav-link ${pathname === '/admin/messages' ? 'active' : ''}`}>
+                  <ion-icon name="mail-unread-outline"></ion-icon> Messages
                 </Link>
               </li>
               <li>
-                <Link href="/admin/messages" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin/messages' ? '#34495e' : 'transparent' }}>
-                  Messages
+                <Link href="/admin/blogs" className={`admin-nav-link ${pathname.startsWith('/admin/blogs') ? 'active' : ''}`}>
+                  <ion-icon name="document-text-outline"></ion-icon> Blogs
                 </Link>
               </li>
               <li>
-                <Link href="/admin/blogs" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname.startsWith('/admin/blogs') ? '#34495e' : 'transparent' }}>
-                  Manage Blogs
-                </Link>
-              </li>
-              <li>
-                <Link href="/" style={{ display: 'block', padding: '15px 20px', color: '#bdc3c7', textDecoration: 'none' }}>
-                  View Site
+                <Link href="/" className="admin-nav-link" style={{ marginTop: '20px' }}>
+                  <ion-icon name="earth-outline"></ion-icon> View Site
                 </Link>
               </li>
             </ul>
           </nav>
-          <div style={{ padding: '20px', borderTop: '1px solid #34495e' }}>
-            <button onClick={handleLogout} style={{ width: '100%', padding: '10px', background: '#e74c3c', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-              Logout
+          <div style={{ padding: '24px' }}>
+            <button onClick={handleLogout} className="premium-btn btn-danger" style={{ width: '100%' }}>
+              <ion-icon name="log-out-outline"></ion-icon> Logout
             </button>
           </div>
         </aside>
@@ -102,16 +85,24 @@ export default function AdminLayout({ children }) {
         {isMobileMenuOpen && (
           <div 
             onClick={() => setIsMobileMenuOpen(false)}
-            style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 40 }}
-            className="admin-overlay"
+            style={{ position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(4px)', zIndex: 40 }}
           ></div>
         )}
 
         {/* Main Content */}
-        <main style={{ flex: 1, padding: '20px', overflowX: 'hidden', overflowY: 'auto' }} className="admin-main">
-          {children}
+        <main style={{ flex: 1, padding: '32px', overflowX: 'hidden', overflowY: 'auto' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            {children}
+          </div>
         </main>
       </div>
+      
+      {/* Hide mobile header on desktop */}
+      <style jsx>{`
+        @media (min-width: 992px) {
+          .admin-mobile-header { display: none !important; }
+        }
+      `}</style>
     </div>
   );
 }

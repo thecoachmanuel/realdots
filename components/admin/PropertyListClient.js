@@ -18,44 +18,61 @@ export default function PropertyListClient({ properties }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '24px', color: '#2c3e50' }}>Manage Properties</h1>
-        <Link href="/admin/properties/new" style={{ padding: '10px 20px', background: '#2ecc71', color: 'white', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>
-          + Add New
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <div>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--admin-text-main)', margin: '0 0 8px 0' }}>Manage Properties</h1>
+          <p style={{ color: 'var(--admin-text-muted)', margin: 0 }}>View, edit, or delete your real estate listings.</p>
+        </div>
+        <Link href="/admin/properties/new" className="premium-btn btn-primary">
+          <ion-icon name="add-circle-outline"></ion-icon> Add New
         </Link>
       </div>
 
-      <div className="admin-table-container" style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="premium-table-container">
+        <table className="premium-table">
           <thead>
-            <tr style={{ background: '#ecf0f1', color: '#34495e' }}>
-              <th style={{ padding: '15px' }}>Title</th>
-              <th style={{ padding: '15px' }}>Location</th>
-              <th style={{ padding: '15px' }}>Price</th>
-              <th style={{ padding: '15px' }}>Badge</th>
-              <th style={{ padding: '15px', textAlign: 'right' }}>Actions</th>
+            <tr>
+              <th>Title</th>
+              <th>Location</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th style={{ textAlign: 'right' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {properties.map(property => (
-              <tr key={property._id} style={{ borderBottom: '1px solid #ecf0f1' }}>
-                <td style={{ padding: '15px' }}>{property.title}</td>
-                <td style={{ padding: '15px' }}>{property.location}</td>
-                <td style={{ padding: '15px' }}>₦{property.price.toLocaleString()} {property.pricePeriod ? `/${property.pricePeriod}` : ''}</td>
-                <td style={{ padding: '15px' }}>{property.badge}</td>
-                <td style={{ padding: '15px', textAlign: 'right' }}>
-                  <Link href={`/admin/properties/${property._id}`} style={{ padding: '6px 12px', background: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '4px', marginRight: '10px' }}>
-                    Edit
+              <tr key={property._id}>
+                <td>
+                  <div style={{ fontWeight: '600' }}>{property.title}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--admin-text-muted)', marginTop: '4px' }}>{property.bedrooms} Beds • {property.bathrooms} Baths</div>
+                </td>
+                <td>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ion-icon name="location-outline" style={{ color: 'var(--admin-text-muted)' }}></ion-icon> {property.location}
+                  </div>
+                </td>
+                <td><strong style={{ color: 'var(--admin-primary)' }}>₦{property.price.toLocaleString()}</strong> {property.pricePeriod ? <span style={{ fontSize: '12px', color: 'var(--admin-text-muted)' }}>/{property.pricePeriod}</span> : ''}</td>
+                <td>
+                  <span className={`admin-badge ${property.badge === 'For Rent' ? 'badge-green' : 'badge-blue'}`}>
+                    {property.badge}
+                  </span>
+                </td>
+                <td style={{ textAlign: 'right' }}>
+                  <Link href={`/admin/properties/${property._id}`} className="action-icon-btn" title="Edit">
+                    <ion-icon name="create-outline"></ion-icon>
                   </Link>
-                  <button onClick={() => handleDelete(property._id)} style={{ padding: '6px 12px', background: '#e74c3c', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                    Delete
+                  <button onClick={() => handleDelete(property._id)} className="action-icon-btn delete" title="Delete">
+                    <ion-icon name="trash-outline"></ion-icon>
                   </button>
                 </td>
               </tr>
             ))}
             {properties.length === 0 && (
               <tr>
-                <td colSpan="5" style={{ padding: '30px', textAlign: 'center', color: '#7f8c8d' }}>No properties found. Add one!</td>
+                <td colSpan="5" style={{ padding: '48px', textAlign: 'center', color: 'var(--admin-text-muted)' }}>
+                  <ion-icon name="home-outline" style={{ fontSize: '48px', marginBottom: '16px', opacity: 0.5 }}></ion-icon>
+                  <p>No properties found. Click "Add New" to create your first listing.</p>
+                </td>
               </tr>
             )}
           </tbody>

@@ -17,56 +17,73 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 style={{ fontSize: '28px', color: '#2c3e50', marginBottom: '20px' }}>Dashboard Overview</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <div>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--admin-text-main)', margin: '0 0 8px 0' }}>Dashboard Overview</h1>
+          <p style={{ color: 'var(--admin-text-muted)', margin: 0 }}>Welcome back, Admin. Here is what's happening today.</p>
+        </div>
+      </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '40px' }}>
         
         {/* Properties Stat Card */}
-        <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '48px', color: '#3498db', marginBottom: '10px' }}>
-            <ion-icon name="home"></ion-icon>
+        <div className="glass-card">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <p style={{ color: 'var(--admin-text-muted)', margin: '0 0 8px 0', textTransform: 'uppercase', fontSize: '12px', fontWeight: '700', letterSpacing: '0.05em' }}>Total Properties</p>
+              <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--admin-text-main)', margin: 0 }}>{propertyCount}</h2>
+            </div>
+            <div className="stat-icon-wrapper stat-blue">
+              <ion-icon name="home"></ion-icon>
+            </div>
           </div>
-          <h2 style={{ fontSize: '36px', color: '#2c3e50', margin: '0 0 10px 0' }}>{propertyCount}</h2>
-          <p style={{ color: '#7f8c8d', margin: 0, textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>Total Properties</p>
-          <Link href="/admin/properties" style={{ marginTop: '20px', color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
-            Manage Properties &rarr;
+          <Link href="/admin/properties" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginTop: '24px', color: '#3b82f6', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+            Manage Properties <ion-icon name="arrow-forward-outline"></ion-icon>
           </Link>
         </div>
 
         {/* Blogs Stat Card */}
-        <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '48px', color: '#27ae60', marginBottom: '10px' }}>
-            <ion-icon name="newspaper"></ion-icon>
+        <div className="glass-card">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <p style={{ color: 'var(--admin-text-muted)', margin: '0 0 8px 0', textTransform: 'uppercase', fontSize: '12px', fontWeight: '700', letterSpacing: '0.05em' }}>Total Blogs</p>
+              <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--admin-text-main)', margin: 0 }}>{blogCount}</h2>
+            </div>
+            <div className="stat-icon-wrapper stat-green">
+              <ion-icon name="newspaper"></ion-icon>
+            </div>
           </div>
-          <h2 style={{ fontSize: '36px', color: '#2c3e50', margin: '0 0 10px 0' }}>{blogCount}</h2>
-          <p style={{ color: '#7f8c8d', margin: 0, textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>Total Blogs</p>
-          <Link href="/admin/blogs" style={{ marginTop: '20px', color: '#27ae60', textDecoration: 'none', fontWeight: '600' }}>
-            Manage Blogs &rarr;
+          <Link href="/admin/blogs" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginTop: '24px', color: '#22c55e', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+            Manage Blogs <ion-icon name="arrow-forward-outline"></ion-icon>
           </Link>
         </div>
 
         {/* Messages Stat Card */}
-        <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '48px', color: '#e67e22', marginBottom: '10px' }}>
-            <ion-icon name="mail"></ion-icon>
+        <div className="glass-card">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <p style={{ color: 'var(--admin-text-muted)', margin: '0 0 8px 0', textTransform: 'uppercase', fontSize: '12px', fontWeight: '700', letterSpacing: '0.05em' }}>New Messages</p>
+              <h2 style={{ fontSize: '36px', fontWeight: '800', color: 'var(--admin-text-main)', margin: 0 }}>{messageCount}</h2>
+            </div>
+            <div className="stat-icon-wrapper stat-orange">
+              <ion-icon name="mail"></ion-icon>
+            </div>
           </div>
-          <h2 style={{ fontSize: '36px', color: '#2c3e50', margin: '0 0 10px 0' }}>{messageCount}</h2>
-          <p style={{ color: '#7f8c8d', margin: 0, textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>Messages</p>
-          <Link href="/admin/messages" style={{ marginTop: '20px', color: '#e67e22', textDecoration: 'none', fontWeight: '600' }}>
-            View Messages &rarr;
+          <Link href="/admin/messages" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginTop: '24px', color: '#f97316', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+            View Messages <ion-icon name="arrow-forward-outline"></ion-icon>
           </Link>
         </div>
 
       </div>
 
-      <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-        <h2 style={{ fontSize: '22px', color: '#2c3e50', marginBottom: '15px' }}>Quick Actions</h2>
-        <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-          <Link href="/admin/properties/new" style={{ padding: '12px 24px', background: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '6px', fontWeight: '600' }}>
-            + Add New Property
+      <div className="glass-card">
+        <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--admin-text-main)', marginBottom: '24px' }}>Quick Actions</h2>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+          <Link href="/admin/properties/new" className="premium-btn btn-primary">
+            <ion-icon name="add-circle-outline"></ion-icon> Add New Property
           </Link>
-          <Link href="/admin/blogs/new" style={{ padding: '12px 24px', background: '#27ae60', color: 'white', textDecoration: 'none', borderRadius: '6px', fontWeight: '600' }}>
-            + Write a Blog Post
+          <Link href="/admin/blogs/new" className="premium-btn btn-outline">
+            <ion-icon name="create-outline"></ion-icon> Write a Blog Post
           </Link>
         </div>
       </div>

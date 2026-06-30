@@ -69,43 +69,49 @@ export default function BlogForm({ initialData = {}, isEdit = false }) {
     }
   };
 
-  const inputStyle = { padding: '10px', borderRadius: '4px', border: '1px solid #ccc', width: '100%' };
-  const labelStyle = { display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#333' };
-  const groupStyle = { marginBottom: '15px' };
-
   return (
-    <form onSubmit={handleSubmit} style={{ background: 'white', padding: '30px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-      {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
+    <form onSubmit={handleSubmit} className="premium-form">
+      {error && <div style={{ background: '#fef2f2', color: '#b91c1c', padding: '12px', borderRadius: '8px', marginBottom: '24px', border: '1px solid #fca5a5' }}>{error}</div>}
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Title</label>
-          <input type="text" name="title" value={formData.title} onChange={handleChange} required style={inputStyle} />
+      <div className="form-grid-2">
+        <div className="form-group">
+          <label className="form-label">Title</label>
+          <input type="text" name="title" value={formData.title} onChange={handleChange} required className="premium-input" placeholder="Enter blog title" />
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Category (e.g. Interior, Market)</label>
-          <input type="text" name="category" value={formData.category} onChange={handleChange} required style={inputStyle} />
+        <div className="form-group">
+          <label className="form-label">Category</label>
+          <input type="text" name="category" value={formData.category} onChange={handleChange} required className="premium-input" placeholder="e.g. Interior, Market" />
         </div>
-        <div style={groupStyle}>
-          <label style={labelStyle}>Image URL</label>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} placeholder="/images/blog-1.png" />
-            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              {uploadingImage ? 'Uploading...' : 'Upload'}
-              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} />
+        <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+          <label className="form-label">Cover Image</label>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <input type="text" name="image" value={formData.image} onChange={handleChange} required className="premium-input" placeholder="https://example.com/image.jpg or upload" />
+            <label className="premium-btn btn-outline" style={{ whiteSpace: 'nowrap', margin: 0 }}>
+              <ion-icon name={uploadingImage ? "sync-outline" : "cloud-upload-outline"}></ion-icon> {uploadingImage ? 'Uploading...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} disabled={uploadingImage} />
             </label>
           </div>
         </div>
       </div>
 
-      <div style={groupStyle}>
-        <label style={labelStyle}>Content</label>
-        <textarea name="content" value={formData.content} onChange={handleChange} required rows="10" style={{...inputStyle, resize: 'vertical'}} />
+      <div className="form-group">
+        <label className="form-label">Content</label>
+        <textarea name="content" value={formData.content} onChange={handleChange} required rows="12" className="premium-input" style={{ resize: 'vertical' }} placeholder="Write your blog post content here..." />
       </div>
 
-      <button type="submit" disabled={loading} style={{ padding: '12px 24px', background: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '16px' }}>
-        {loading ? 'Saving...' : isEdit ? 'Update Blog' : 'Add Blog'}
-      </button>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '32px' }}>
+        <button type="submit" disabled={loading} className="premium-btn btn-primary" style={{ minWidth: '150px' }}>
+          {loading ? (
+            <><ion-icon name="sync-outline" className="spin"></ion-icon> Saving...</>
+          ) : (
+            <><ion-icon name="save-outline"></ion-icon> {isEdit ? 'Update Blog' : 'Publish Blog'}</>
+          )}
+        </button>
+      </div>
+      <style jsx>{`
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+      `}</style>
     </form>
   );
 }
