@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useWishlist } from '@/components/WishlistProvider';
 
@@ -6,11 +7,39 @@ export default function PropertyCard({ property }) {
   const { wishlist, toggleWishlist, isInWishlist } = useWishlist();
   const isSaved = isInWishlist(property._id);
 
+  // Combine primary image and extra images
+  const allImages = [property.image, ...(property.images || [])].filter(Boolean);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (allImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+    }, 3000 + Math.random() * 2000); // randomize slightly so all cards don't flip at exact same time
+    return () => clearInterval(interval);
+  }, [allImages.length]);
+
   return (
     <div className="property-card">
-      <figure className="card-banner">
+      <figure className="card-banner" style={{ position: 'relative', overflow: 'hidden', height: '250px' }}>
         <Link href={`/property/${property._id}`}>
-          <img src={property.image} alt={property.title} className="w-100" style={{ height: '250px', objectFit: 'cover' }} />
+          {allImages.map((img, idx) => (
+            <img 
+              key={idx}
+              src={img} 
+              alt={property.title} 
+              className="w-100" 
+              style={{ 
+                height: '250px', 
+                objectFit: 'cover', 
+                position: 'absolute', 
+                top: 0, left: 0, 
+                opacity: currentImageIndex === idx ? 1 : 0,
+                transition: 'opacity 0.8s ease-in-out',
+                zIndex: currentImageIndex === idx ? 1 : 0
+              }} 
+            />
+          ))}
         </Link>
         <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`}>
           {property.badge}
@@ -22,7 +51,7 @@ export default function PropertyCard({ property }) {
           </button>
           <button className="banner-actions-btn" aria-label="Camera">
             <ion-icon name="camera"></ion-icon>
-            <span>4</span>
+            <span>{allImages.length}</span>
           </button>
           <button className="banner-actions-btn" aria-label="Film">
             <ion-icon name="film"></ion-icon>

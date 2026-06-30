@@ -1,5 +1,6 @@
 import "./globals.css";
 import { WishlistProvider } from '@/components/WishlistProvider';
+import ScrollAnimation from '@/components/ScrollAnimation';
 
 export const metadata = {
   title: "RealDots - Find your dream house",
@@ -19,9 +20,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <WishlistProvider>
-          {children}
-        </WishlistProvider>
+        <ScrollAnimation>
+          <WishlistProvider>
+            {children}
+          </WishlistProvider>
+        </ScrollAnimation>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" async></script>
         <script noModule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" async></script>
       </body>

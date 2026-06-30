@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function CTA() {
   return (
-    <section className="cta">
+    <section className="cta animate-on-scroll">
       <div className="container">
         <div className="cta-card">
           <div className="card-content">

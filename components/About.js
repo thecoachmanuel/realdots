@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section className="about" id="about">
+    <section className="about animate-on-scroll" id="about">
       <div className="container">
         <figure className="about-banner">
           <img src="/images/about-banner-1.png" alt="House interior" />

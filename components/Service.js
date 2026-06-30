@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Service() {
   return (
-    <section className="service" id="service">
+    <section className="service animate-on-scroll" id="service">
       <div className="container">
         <p className="section-subtitle">Our Services</p>
         <h2 className="h2 section-title">Our Main Focus</h2>

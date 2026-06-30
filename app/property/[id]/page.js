@@ -5,6 +5,8 @@ import Property from '@/models/Property';
 import ContactForm from '@/components/ContactForm';
 import { notFound } from 'next/navigation';
 import mongoose from 'mongoose';
+import PropertyCard from '@/components/PropertyCard';
+import Link from 'next/link';
 
 export const revalidate = 0; // Disable caching to fetch live data
 
@@ -23,9 +25,28 @@ async function getProperty(id) {
   }
 }
 
+async function getSimilarProperties(badge, excludeId) {
+  try {
+    await dbConnect();
+    const similar = await Property.find({ badge, _id: { $ne: excludeId } })
+      .sort({ createdAt: -1 })
+      .limit(3)
+      .lean();
+    return similar.map(doc => {
+      const prop = { ...doc };
+      prop._id = prop._id.toString();
+      return prop;
+    });
+  } catch (error) {
+    console.error("Error fetching similar properties:", error);
+    return [];
+  }
+}
+
 export default async function PropertyDetails({ params }) {
   const resolvedParams = await params;
   const property = await getProperty(resolvedParams.id);
+  const similarProperties = property ? await getSimilarProperties(property.badge, property._id) : [];
 
   if (!property) {
     notFound();
@@ -39,16 +60,20 @@ export default async function PropertyDetails({ params }) {
           <div style={{ display: 'grid', gap: '40px', gridTemplateColumns: '1fr', '@media (minWidth: 992px)': { gridTemplateColumns: '2fr 1fr' } }}>
             {/* Property Details Section */}
             <div>
-              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', marginBottom: '30px' }}>
-                <img 
-                  src={property.image} 
-                  alt={property.title} 
-                  style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} 
-                />
-                <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`} style={{ position: 'absolute', top: '20px', left: '20px' }}>
+              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', marginBottom: '30px', display: 'flex', gap: '10px', overflowX: 'auto', scrollSnapType: 'x mandatory' }}>
+                {[property.image, ...(property.images || [])].filter(Boolean).map((imgUrl, idx) => (
+                  <img 
+                    key={idx}
+                    src={imgUrl} 
+                    alt={`${property.title} - Image ${idx + 1}`} 
+                    style={{ minWidth: '100%', height: '400px', display: 'block', objectFit: 'cover', scrollSnapAlign: 'start', borderRadius: '12px' }} 
+                  />
+                ))}
+                <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`} style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10 }}>
                   {property.badge}
                 </div>
               </div>
+              <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--cadet)', marginTop: '-20px', marginBottom: '30px'}}>Swipe to view more images</p>
               
               <h1 className="h2" style={{ marginBottom: '15px' }}>{property.title}</h1>
               <p style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--cadet)', marginBottom: '20px' }}>
@@ -117,6 +142,33 @@ export default async function PropertyDetails({ params }) {
             </div>
 
           </div>
+
+          {/* Similar Properties Section */}
+          {similarProperties.length > 0 && (
+            <div style={{ marginTop: '80px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+                <h2 className="h2 section-title" style={{ margin: 0 }}>Similar Properties</h2>
+                <Link href="/properties" className="btn" style={{ padding: '10px 20px', fontSize: '14px' }}>
+                  View All Properties
+                </Link>
+              </div>
+              <ul className="property-list has-scrollbar animate-on-scroll">
+                {similarProperties.map((prop, idx) => (
+                  <li key={prop._id || idx}>
+                    <PropertyCard property={prop} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {similarProperties.length === 0 && (
+            <div style={{ marginTop: '50px', textAlign: 'center' }}>
+              <Link href="/properties" className="btn" style={{ display: 'inline-block', padding: '15px 30px' }}>
+                View All Properties
+              </Link>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

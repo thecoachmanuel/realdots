@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function PropertySection({ properties = [], activeFilter = null }) {
   return (
-    <section className="property" id="property">
+    <section className="property animate-on-scroll" id="property">
       <div className="container">
         <p className="section-subtitle">Properties</p>
         

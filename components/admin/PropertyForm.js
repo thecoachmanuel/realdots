@@ -11,6 +11,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     pricePeriod: initialData.pricePeriod || 'Month',
     location: initialData.location || '',
     image: initialData.image || '',
+    images: initialData.images ? initialData.images.join(', ') : '',
     badge: initialData.badge || 'For Rent',
     bedrooms: initialData.bedrooms || '',
     bathrooms: initialData.bathrooms || '',
@@ -55,10 +56,15 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     const url = isEdit ? `/api/properties/${initialData._id}` : '/api/properties';
     const method = isEdit ? 'PUT' : 'POST';
 
+    const payload = { 
+      ...formData, 
+      images: formData.images.split(',').map(url => url.trim()).filter(url => url)
+    };
+
     const res = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(payload)
     });
 
     if (res.ok) {
@@ -101,8 +107,12 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
           </select>
         </div>
         <div style={groupStyle}>
-          <label style={labelStyle}>Image URL</label>
+          <label style={labelStyle}>Primary Image URL</label>
           <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} />
+        </div>
+        <div style={groupStyle}>
+          <label style={labelStyle}>Extra Images (Comma separated URLs)</label>
+          <input type="text" name="images" value={formData.images} onChange={handleChange} style={inputStyle} placeholder="/images/prop2.jpg, /images/prop3.jpg" />
         </div>
         <div style={groupStyle}>
           <label style={labelStyle}>Badge</label>

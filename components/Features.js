@@ -13,7 +13,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="features">
+    <section className="features animate-on-scroll">
       <div className="container">
         <p className="section-subtitle">Our Aminities</p>
         <h2 className="h2 section-title">Building Aminities</h2>

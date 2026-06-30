@@ -24,7 +24,11 @@ const PropertySchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Please provide an image url.'],
+    required: [true, 'Please provide a primary image url.'],
+  },
+  images: {
+    type: [String],
+    default: [],
   },
   badge: {
     type: String, // 'For Rent', 'For Sales'

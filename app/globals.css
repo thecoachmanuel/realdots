@@ -252,8 +252,11 @@ button, a { transition: var(--transition); }
   margin-inline: -15px;
   padding-inline: 15px;
   scroll-padding-left: 15px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   scroll-snap-type: inline mandatory;
+  /* Visual cues */
+  scrollbar-width: thin;
+  scrollbar-color: var(--orange-soda) var(--cultured-2);
 }
 
 .has-scrollbar > li {
@@ -261,24 +264,44 @@ button, a { transition: var(--transition); }
   scroll-snap-align: start;
 }
 
+@media (min-width: 500px) {
+  .has-scrollbar > li {
+    min-width: calc(50% - 7.5px);
+  }
+}
+
+@media (min-width: 992px) {
+  .has-scrollbar > li {
+    min-width: calc(33.33% - 10px);
+  }
+}
+
+.has-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
 .has-scrollbar::-webkit-scrollbar-track {
   background: var(--cultured-2);
-  outline: 2px solid var(--cadet);
   border-radius: 10px;
 }
 
 .has-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--cadet);
-  border: 1px solid var(--cultured-2);
+  background: var(--orange-soda);
   border-radius: 10px;
 }
 
-.has-scrollbar::-webkit-scrollbar-button { width: 15%; }
+/* Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: opacity, transform;
+}
 
-
-
-
-
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 /*-----------------------------------*\
   #HEADER
 \*-----------------------------------*/
@@ -1665,4 +1688,38 @@ button, a { transition: var(--transition); }
 
   .footer-link-box { flex-basis: 700px; }
 
+}
+
+/* Admin Dashboard Responsive Styles */
+.admin-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2c3e50;
+  padding: 15px 20px;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .admin-mobile-header {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .admin-sidebar {
+    position: static !important;
+    display: flex !important;
+  }
+  .admin-sidebar-header {
+    display: block !important;
+  }
+}
+
+.admin-table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+.admin-table-container table {
+  min-width: 800px;
 }

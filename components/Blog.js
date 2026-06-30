@@ -4,7 +4,7 @@ export default function Blog({ blogs = [] }) {
   if (!blogs || blogs.length === 0) return null;
 
   return (
-    <section className="blog" id="blog">
+    <section className="blog animate-on-scroll" id="blog">
       <div className="container">
         <p className="section-subtitle">News & Blogs</p>
         <h2 className="h2 section-title">Latest News Feeds</h2>
