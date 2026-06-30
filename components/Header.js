@@ -118,17 +118,6 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* Mobile menu open button (moved from bottom left actions) */}
-          <button className="header-mobile-menu-btn" data-nav-open-btn aria-label="Open Menu" onClick={toggleNav} style={{ display: 'none', background: 'none', border: 'none', fontSize: '32px', color: 'var(--cadet)', cursor: 'pointer' }}>
-            <ion-icon name="menu-outline"></ion-icon>
-          </button>
-          
-          <style jsx>{`
-            @media (max-width: 991px) {
-              .header-mobile-menu-btn { display: block !important; }
-            }
-          `}</style>
-
           <div className="header-bottom-actions">
             <Link href="/properties" className="header-bottom-actions-btn" aria-label="Search">
               <ion-icon name="search-outline"></ion-icon>
@@ -178,6 +167,10 @@ export default function Header() {
                 </span>
               )}
             </Link>
+            <button className="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu" onClick={toggleNav}>
+              <ion-icon name="menu-outline"></ion-icon>
+              <span>Menu</span>
+            </button>
           </div>
         </div>
       </div>
