@@ -175,6 +175,25 @@ body {
 
 .container { padding-inline: 15px; }
 
+/* Properties page responsive grid */
+.properties-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .properties-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .properties-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 button, a { transition: var(--transition); }
 
 .h1,
