@@ -8,25 +8,25 @@ export default function Footer() {
               <img src="/images/logo-light.png" alt="Homeverse logo" />
             </a>
             <p className="section-text">
-              Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.
+              RealDots Properties provides exceptional real estate services, helping you find the perfect property in Nigeria. We are dedicated to delivering premium homes and excellent customer care.
             </p>
             <ul className="contact-list">
               <li>
                 <a href="#" className="contact-link">
                   <ion-icon name="location-outline"></ion-icon>
-                  <address>Brooklyn, New York, United States</address>
+                  <address>Lekki, Lagos</address>
                 </a>
               </li>
               <li>
-                <a href="tel:+0123456789" className="contact-link">
+                <a href="tel:+2348034382235" className="contact-link">
                   <ion-icon name="call-outline"></ion-icon>
-                  <span>+0123-456789</span>
+                  <span>+234 803 438 2235</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@homeverse.com" className="contact-link">
+                <a href="mailto:realdotsproperties@gmail.com" className="contact-link">
                   <ion-icon name="mail-outline"></ion-icon>
-                  <span>contact@homeverse.com</span>
+                  <span>realdotsproperties@gmail.com</span>
                 </a>
               </li>
             </ul>
@@ -50,7 +50,7 @@ export default function Footer() {
             </ul>
             <ul className="footer-list">
               <li><p className="footer-list-title">Services</p></li>
-              <li><a href="#" className="footer-link">Order tracking</a></li>
+              <li><a href="#" className="footer-link">Properties</a></li>
               <li><a href="#" className="footer-link">Wish List</a></li>
               <li><a href="#" className="footer-link">Login</a></li>
               <li><a href="#" className="footer-link">My account</a></li>
@@ -62,7 +62,7 @@ export default function Footer() {
               <li><a href="#" className="footer-link">Login</a></li>
               <li><a href="#" className="footer-link">My account</a></li>
               <li><a href="#" className="footer-link">Wish List</a></li>
-              <li><a href="#" className="footer-link">Order tracking</a></li>
+              <li><a href="#" className="footer-link">Properties</a></li>
               <li><a href="#" className="footer-link">FAQ</a></li>
               <li><a href="#" className="footer-link">Contact us</a></li>
             </ul>

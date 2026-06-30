@@ -9,7 +9,7 @@ export default function Hero() {
           </p>
           <h2 className="h1 hero-title">Find Your Dream House By Us</h2>
           <p className="hero-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+            Discover your ideal home with RealDots. We offer a curated selection of premium properties to perfectly match your lifestyle and needs in Lagos.
           </p>
           <button className="btn">Make An Enquiry</button>
         </div>

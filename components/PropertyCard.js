@@ -1,10 +1,12 @@
+import Link from 'next/link';
+
 export default function PropertyCard({ property }) {
   return (
     <div className="property-card">
       <figure className="card-banner">
-        <a href="#">
+        <Link href={`/property/${property._id}`}>
           <img src={property.image} alt={property.title} className="w-100" />
-        </a>
+        </Link>
         <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`}>
           {property.badge}
         </div>
@@ -29,7 +31,7 @@ export default function PropertyCard({ property }) {
           <strong>${property.price.toLocaleString()}</strong>/{property.pricePeriod}
         </div>
         <h3 className="h3 card-title">
-          <a href="#">{property.title}</a>
+          <Link href={`/property/${property._id}`}>{property.title}</Link>
         </h3>
         <p className="card-text">{property.description}</p>
         <ul className="card-list">
@@ -58,9 +60,9 @@ export default function PropertyCard({ property }) {
           </figure>
           <div>
             <p className="author-name">
-              <a href="#">{property.author?.name || "William Seklo"}</a>
+              <Link href={`/property/${property._id}`}>{property.author?.name || "Onyinye"}</Link>
             </p>
-            <p className="author-title">{property.author?.title || "Estate Agents"}</p>
+            <p className="author-title">{property.author?.title || "Estate Agent"}</p>
           </div>
         </div>
         <div className="card-footer-actions">

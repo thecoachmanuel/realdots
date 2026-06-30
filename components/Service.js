@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Service() {
   return (
     <section className="service" id="service">
@@ -10,14 +12,14 @@ export default function Service() {
               <div className="card-icon">
                 <img src="/images/service-1.png" alt="Service icon" />
               </div>
-              <h3 className="h3 card-title"><a href="#">Buy a home</a></h3>
+              <h3 className="h3 card-title"><Link href="/#property">Buy a home</Link></h3>
               <p className="card-text">
                 over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.
               </p>
-              <a href="#" className="card-link">
+              <Link href="/#property" className="card-link">
                 <span>Find A Home</span>
                 <ion-icon name="arrow-forward-outline"></ion-icon>
-              </a>
+              </Link>
             </div>
           </li>
           <li>
@@ -25,14 +27,14 @@ export default function Service() {
               <div className="card-icon">
                 <img src="/images/service-2.png" alt="Service icon" />
               </div>
-              <h3 className="h3 card-title"><a href="#">Rent a home</a></h3>
+              <h3 className="h3 card-title"><Link href="/#property">Rent a home</Link></h3>
               <p className="card-text">
                 over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.
               </p>
-              <a href="#" className="card-link">
+              <Link href="/#property" className="card-link">
                 <span>Find A Home</span>
                 <ion-icon name="arrow-forward-outline"></ion-icon>
-              </a>
+              </Link>
             </div>
           </li>
           <li>
@@ -40,14 +42,14 @@ export default function Service() {
               <div className="card-icon">
                 <img src="/images/service-3.png" alt="Service icon" />
               </div>
-              <h3 className="h3 card-title"><a href="#">Sell a home</a></h3>
+              <h3 className="h3 card-title"><Link href="/#property">Sell a home</Link></h3>
               <p className="card-text">
                 over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.
               </p>
-              <a href="#" className="card-link">
+              <Link href="/#property" className="card-link">
                 <span>Find A Home</span>
                 <ion-icon name="arrow-forward-outline"></ion-icon>
-              </a>
+              </Link>
             </div>
           </li>
         </ul>

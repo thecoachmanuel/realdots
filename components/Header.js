@@ -25,15 +25,15 @@ export default function Header() {
         <div className="container">
           <ul className="header-top-list">
             <li>
-              <a href="mailto:info@homeverse.com" className="header-top-link">
+              <a href="mailto:realdotsproperties@gmail.com" className="header-top-link">
                 <ion-icon name="mail-outline"></ion-icon>
-                <span>info@homeverse.com</span>
+                <span>realdotsproperties@gmail.com</span>
               </a>
             </li>
             <li>
               <a href="#" className="header-top-link">
                 <ion-icon name="location-outline"></ion-icon>
-                <address>15/A, Nest Tower, NYC</address>
+                <address>Lekki, Lagos</address>
               </a>
             </li>
           </ul>
@@ -67,12 +67,12 @@ export default function Header() {
             </div>
             <div className="navbar-bottom">
               <ul className="navbar-list">
-                <li><Link href="#home" className="navbar-link" onClick={closeNav}>Home</Link></li>
-                <li><Link href="#about" className="navbar-link" onClick={closeNav}>About</Link></li>
-                <li><Link href="#service" className="navbar-link" onClick={closeNav}>Service</Link></li>
-                <li><Link href="#property" className="navbar-link" onClick={closeNav}>Property</Link></li>
-                <li><Link href="#blog" className="navbar-link" onClick={closeNav}>Blog</Link></li>
-                <li><Link href="#contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
+                <li><Link href="/" className="navbar-link" onClick={closeNav}>Home</Link></li>
+                <li><Link href="/#about" className="navbar-link" onClick={closeNav}>About</Link></li>
+                <li><Link href="/#service" className="navbar-link" onClick={closeNav}>Service</Link></li>
+                <li><Link href="/#property" className="navbar-link" onClick={closeNav}>Property</Link></li>
+                <li><Link href="/#blog" className="navbar-link" onClick={closeNav}>Blog</Link></li>
+                <li><Link href="/#contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
               </ul>
             </div>
           </nav>
