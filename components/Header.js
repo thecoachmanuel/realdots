@@ -36,7 +36,7 @@ export default function Header() {
             <li>
               <a href="#" className="header-top-link">
                 <ion-icon name="location-outline"></ion-icon>
-                <address>Lekki, Lagos</address>
+                <address>Km 24, Richland Mall, Sangotedo, Ajah, Lagos</address>
               </a>
             </li>
           </ul>
