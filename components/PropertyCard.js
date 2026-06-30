@@ -21,8 +21,8 @@ export default function PropertyCard({ property }) {
 
   return (
     <div className="property-card">
-      <figure className="card-banner" style={{ position: 'relative', overflow: 'hidden', height: '250px' }}>
-        <Link href={`/property/${property._id}`}>
+      <figure className="card-banner" style={{ position: 'relative', overflow: 'hidden', height: '250px', display: 'block', width: '100%' }}>
+        <Link href={`/property/${property._id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
           {allImages.map((img, idx) => (
             <img 
               key={idx}
@@ -30,6 +30,7 @@ export default function PropertyCard({ property }) {
               alt={property.title} 
               className="w-100" 
               style={{ 
+                width: '100%',
                 height: '250px', 
                 objectFit: 'cover', 
                 position: 'absolute', 
