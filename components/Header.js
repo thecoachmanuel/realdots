@@ -102,18 +102,6 @@ export default function Header() {
                 <li><Link href="/properties" className="navbar-link" onClick={closeNav}>Property</Link></li>
                 <li><Link href="/#blog" className="navbar-link" onClick={closeNav}>Blog</Link></li>
                 <li><Link href="/contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
-                {/* Mobile-only auth links */}
-                {user ? (
-                  <>
-                    <li><Link href="/profile" className="navbar-link" onClick={closeNav}>My Profile</Link></li>
-                    <li><button onClick={handleLogout} className="navbar-link" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#e74c3c', padding: '15px 0', textAlign: 'left', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', textTransform: 'inherit' }}>Sign Out</button></li>
-                  </>
-                ) : (
-                  <>
-                    <li><Link href="/login" className="navbar-link" onClick={closeNav}>Sign In</Link></li>
-                    <li><Link href="/signup" className="navbar-link" onClick={closeNav} style={{ color: 'var(--orange-soda)' }}>Sign Up</Link></li>
-                  </>
-                )}
               </ul>
             </div>
           </nav>
@@ -141,7 +129,7 @@ export default function Header() {
                   <span style={{ maxWidth: '60px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.name?.split(' ')[0]}</span>
                 </button>
                 {dropdownOpen && (
-                  <div style={{ position: 'absolute', bottom: '100%', left: '50%', transform: 'translateX(-50%)', background: 'white', borderRadius: '10px', boxShadow: '0 8px 30px rgba(0,0,0,0.15)', padding: '8px', minWidth: '150px', zIndex: 1200, marginBottom: '10px' }}>
+                  <div style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', background: 'white', borderRadius: '10px', boxShadow: '0 8px 30px rgba(0,0,0,0.15)', padding: '8px', minWidth: '150px', zIndex: 1200, marginTop: '10px' }}>
                     <Link href="/profile" onClick={() => setDropdownOpen(false)} style={{ display: 'block', padding: '10px 16px', color: 'var(--dark-jungle-green)', textDecoration: 'none', borderRadius: '6px', fontWeight: '600', fontSize: '14px' }}>
                       👤 My Profile
                     </Link>
