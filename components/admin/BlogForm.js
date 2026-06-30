@@ -91,6 +91,11 @@ export default function BlogForm({ initialData = {}, isEdit = false }) {
               <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} disabled={uploadingImage} />
             </label>
           </div>
+          {formData.image && (
+            <div style={{ marginTop: '12px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--admin-border)', width: 'fit-content' }}>
+              <img src={formData.image} alt="Preview" style={{ height: '120px', display: 'block', objectFit: 'cover' }} />
+            </div>
+          )}
         </div>
       </div>
 

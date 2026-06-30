@@ -146,6 +146,11 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
               <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'image')} disabled={uploadingImage} />
             </label>
           </div>
+          {formData.image && (
+            <div style={{ marginTop: '12px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--admin-border)', width: 'fit-content' }}>
+              <img src={formData.image} alt="Preview" style={{ height: '120px', display: 'block', objectFit: 'cover' }} />
+            </div>
+          )}
         </div>
         <div className="form-group">
           <label className="form-label">Extra Images (Comma separated URLs)</label>
@@ -156,6 +161,15 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
               <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'images')} disabled={uploadingImage} />
             </label>
           </div>
+          {formData.images && (
+            <div style={{ marginTop: '12px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {formData.images.split(',').map((url, i) => url.trim() && (
+                <div key={i} style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--admin-border)' }}>
+                  <img src={url.trim()} alt="Preview" style={{ height: '80px', display: 'block', objectFit: 'cover' }} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="form-group">
