@@ -42,6 +42,7 @@ const PropertySchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please provide square footage.'],
   },
+  amenities: [String],
   author: {
     name: String,
     title: String,

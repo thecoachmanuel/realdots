@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import Logo from '@/components/Logo';
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -5,7 +8,7 @@ export default function Footer() {
         <div className="container">
           <div className="footer-brand">
             <a href="#" className="logo">
-              <img src="/images/logo-light.png" alt="Homeverse logo" />
+              <Logo width={180} textColor="#ffffff" />
             </a>
             <p className="section-text">
               RealDots Properties provides exceptional real estate services, helping you find the perfect property in Nigeria. We are dedicated to delivering premium homes and excellent customer care.

@@ -1,10 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useWishlist } from '@/components/WishlistProvider';
+import Logo from '@/components/Logo';
 
 export default function Header() {
   const [isNavActive, setIsNavActive] = useState(false);
   const [isHeaderActive, setIsHeaderActive] = useState(false);
+  const { wishlist, isLoaded } = useWishlist();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +48,7 @@ export default function Header() {
               <li><a href="#" className="header-top-social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
               <li><a href="#" className="header-top-social-link"><ion-icon name="logo-pinterest"></ion-icon></a></li>
             </ul>
-            <button className="header-top-btn">Add Listing</button>
+            <Link href="/admin/properties/new" className="header-top-btn">Add Listing</Link>
           </div>
         </div>
       </div>
@@ -53,13 +56,13 @@ export default function Header() {
       <div className="header-bottom">
         <div className="container">
           <Link href="/" className="logo">
-            <img src="/images/logo.png" alt="Homeverse logo" />
+            <Logo width={180} />
           </Link>
 
           <nav className={`navbar ${isNavActive ? 'active' : ''}`} data-navbar>
             <div className="navbar-top">
               <Link href="/" className="logo">
-                <img src="/images/logo.png" alt="Homeverse logo" />
+                <Logo width={160} />
               </Link>
               <button className="nav-close-btn" data-nav-close-btn aria-label="Close Menu" onClick={closeNav}>
                 <ion-icon name="close-outline"></ion-icon>
@@ -72,24 +75,29 @@ export default function Header() {
                 <li><Link href="/#service" className="navbar-link" onClick={closeNav}>Service</Link></li>
                 <li><Link href="/#property" className="navbar-link" onClick={closeNav}>Property</Link></li>
                 <li><Link href="/#blog" className="navbar-link" onClick={closeNav}>Blog</Link></li>
-                <li><Link href="/#contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
+                <li><Link href="/contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
               </ul>
             </div>
           </nav>
 
           <div className="header-bottom-actions">
-            <button className="header-bottom-actions-btn" aria-label="Search">
+            <Link href="/properties" className="header-bottom-actions-btn" aria-label="Search">
               <ion-icon name="search-outline"></ion-icon>
               <span>Search</span>
-            </button>
+            </Link>
             <button className="header-bottom-actions-btn" aria-label="Profile">
               <ion-icon name="person-outline"></ion-icon>
               <span>Profile</span>
             </button>
-            <button className="header-bottom-actions-btn" aria-label="Cart">
-              <ion-icon name="cart-outline"></ion-icon>
-              <span>Cart</span>
-            </button>
+            <Link href="/wishlist" className="header-bottom-actions-btn" aria-label="Wishlist" style={{ position: 'relative' }}>
+              <ion-icon name="heart-outline"></ion-icon>
+              <span>Wishlist</span>
+              {isLoaded && wishlist.length > 0 && (
+                <span style={{ position: 'absolute', top: '5px', right: '5px', background: 'var(--orange-soda)', color: 'white', fontSize: '10px', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', display: 'block' }}>
+                  {wishlist.length}
+                </span>
+              )}
+            </Link>
             <button className="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu" onClick={toggleNav}>
               <ion-icon name="menu-outline"></ion-icon>
               <span>Menu</span>

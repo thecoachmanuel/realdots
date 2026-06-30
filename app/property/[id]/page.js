@@ -57,13 +57,13 @@ export default async function PropertyDetails({ params }) {
               </p>
 
               <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--orange-soda)', marginBottom: '30px' }}>
-                ${property.price.toLocaleString()} <span style={{ fontSize: '1rem', color: 'var(--cadet)', fontWeight: '400' }}>/{property.pricePeriod}</span>
+                ₦{property.price.toLocaleString()} <span style={{ fontSize: '1rem', color: 'var(--cadet)', fontWeight: '400' }}>/{property.pricePeriod}</span>
               </div>
 
               <h2 className="h3" style={{ marginBottom: '15px' }}>Property Details</h2>
               <p style={{ color: 'var(--cadet)', lineHeight: '1.7', marginBottom: '30px' }}>{property.description}</p>
 
-              <ul className="card-list" style={{ padding: '0', display: 'flex', gap: '20px', listStyle: 'none' }}>
+              <ul className="card-list" style={{ padding: '0', display: 'flex', gap: '20px', listStyle: 'none', marginBottom: '30px' }}>
                 <li className="card-item" style={{ flex: '1' }}>
                   <strong>{property.bedrooms}</strong>
                   <ion-icon name="bed-outline"></ion-icon>
@@ -80,6 +80,19 @@ export default async function PropertyDetails({ params }) {
                   <span>Square Ft</span>
                 </li>
               </ul>
+
+              {property.amenities && property.amenities.length > 0 && (
+                <>
+                  <h2 className="h3" style={{ marginBottom: '15px' }}>Amenities</h2>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '30px' }}>
+                    {property.amenities.map(amenity => (
+                      <span key={amenity} style={{ background: 'var(--alice-blue)', color: 'var(--dark-jungle-green)', padding: '8px 15px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: '500' }}>
+                        {amenity}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Contact Form Section */}
@@ -96,8 +109,8 @@ export default async function PropertyDetails({ params }) {
                   <a href="tel:+2348034382235" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-jungle-green)', fontWeight: '600', marginBottom: '5px' }}>
                     <ion-icon name="call-outline"></ion-icon> +234 803 438 2235
                   </a>
-                  <a href="mailto:info@realdotsproperties.com" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-jungle-green)', fontWeight: '600' }}>
-                    <ion-icon name="mail-outline"></ion-icon> info@realdotsproperties.com
+                  <a href="mailto:realdotsproperties@gmail.com" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-jungle-green)', fontWeight: '600' }}>
+                    <ion-icon name="mail-outline"></ion-icon> realdotsproperties@gmail.com
                   </a>
                 </div>
               </div>

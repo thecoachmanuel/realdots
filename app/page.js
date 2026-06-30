@@ -10,13 +10,15 @@ import Footer from '@/components/Footer';
 
 import dbConnect from '@/lib/mongodb';
 import Property from '@/models/Property';
+import BlogModel from '@/models/Blog';
 
 export const revalidate = 0; // Disable caching for now to see dynamic changes immediately
 
-async function getProperties() {
+async function getProperties(amenity) {
   try {
     await dbConnect();
-    const properties = await Property.find({}).lean();
+    const query = amenity ? { amenities: amenity } : {};
+    const properties = await Property.find(query).lean();
     
     // Convert ObjectId and nested objects to plain strings for Next.js serialization
     return properties.map(doc => {
@@ -30,8 +32,27 @@ async function getProperties() {
   }
 }
 
-export default async function Home() {
-  const properties = await getProperties();
+async function getBlogs() {
+  try {
+    await dbConnect();
+    const blogs = await BlogModel.find({}).sort({ createdAt: -1 }).limit(3).lean();
+    return blogs.map(doc => {
+      const blog = { ...doc };
+      blog._id = blog._id.toString();
+      blog.createdAt = blog.createdAt.toISOString();
+      return blog;
+    });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return [];
+  }
+}
+
+export default async function Home({ searchParams }) {
+  const resolvedParams = await searchParams;
+  const amenityFilter = resolvedParams?.amenity || null;
+  const properties = await getProperties(amenityFilter);
+  const blogs = await getBlogs();
 
   return (
     <>
@@ -41,9 +62,9 @@ export default async function Home() {
           <Hero />
           <About />
           <Service />
-          <PropertySection properties={properties} />
+          <PropertySection properties={properties} activeFilter={amenityFilter} />
           <Features />
-          <Blog />
+          <Blog blogs={blogs} />
           <CTA />
         </article>
       </main>

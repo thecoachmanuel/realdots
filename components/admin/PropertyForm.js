@@ -15,6 +15,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     bedrooms: initialData.bedrooms || '',
     bathrooms: initialData.bathrooms || '',
     squareFt: initialData.squareFt || '',
+    amenities: initialData.amenities || [],
     author: {
       name: initialData.author?.name || 'Onyinye',
       title: initialData.author?.title || 'Estate Agent',
@@ -33,6 +34,17 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
+  };
+
+  const handleAmenityChange = (amenity) => {
+    setFormData(prev => {
+      const exists = prev.amenities.includes(amenity);
+      if (exists) {
+        return { ...prev, amenities: prev.amenities.filter(a => a !== amenity) };
+      } else {
+        return { ...prev, amenities: [...prev.amenities, amenity] };
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -116,6 +128,22 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
       <div style={groupStyle}>
         <label style={labelStyle}>Description</label>
         <textarea name="description" value={formData.description} onChange={handleChange} required rows="4" style={{...inputStyle, resize: 'vertical'}} />
+      </div>
+
+      <div style={groupStyle}>
+        <label style={labelStyle}>Amenities</label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+          {['Parking Space', 'Swimming Pool', 'Private Security', 'Medical Center', 'Library Area', 'King Size Beds', 'Smart Homes', "Kid’s Playland"].map(amenity => (
+            <label key={amenity} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+              <input 
+                type="checkbox" 
+                checked={formData.amenities.includes(amenity)} 
+                onChange={() => handleAmenityChange(amenity)} 
+              />
+              {amenity}
+            </label>
+          ))}
+        </div>
       </div>
 
       <button type="submit" disabled={loading} style={{ padding: '12px 24px', background: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '16px' }}>

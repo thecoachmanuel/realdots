@@ -42,6 +42,11 @@ export default function AdminLayout({ children }) {
               </Link>
             </li>
             <li>
+              <Link href="/admin/blogs" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname.startsWith('/admin/blogs') ? '#34495e' : 'transparent' }}>
+                Manage Blogs
+              </Link>
+            </li>
+            <li>
               <Link href="/" style={{ display: 'block', padding: '15px 20px', color: '#bdc3c7', textDecoration: 'none' }}>
                 View Site
               </Link>

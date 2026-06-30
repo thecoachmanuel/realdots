@@ -1,3 +1,6 @@
+import React from 'react';
+import Link from 'next/link';
+
 export default function Hero() {
   return (
     <section className="hero" id="home">
@@ -11,7 +14,7 @@ export default function Hero() {
           <p className="hero-text">
             Discover your ideal home with RealDots. We offer a curated selection of premium properties to perfectly match your lifestyle and needs in Lagos.
           </p>
-          <button className="btn">Make An Enquiry</button>
+          <Link href="/contact" className="btn">Make An Enquiry</Link>
         </div>
         <figure className="hero-banner">
           <img src="/images/hero-banner.png" alt="Modern house model" className="w-100" />

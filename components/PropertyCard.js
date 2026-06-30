@@ -1,34 +1,44 @@
 import Link from 'next/link';
+import { useWishlist } from '@/components/WishlistProvider';
 
 export default function PropertyCard({ property }) {
+  const { wishlist, toggleWishlist, isInWishlist } = useWishlist();
+  const isSaved = isInWishlist(property._id);
+
   return (
     <div className="property-card">
       <figure className="card-banner">
         <Link href={`/property/${property._id}`}>
-          <img src={property.image} alt={property.title} className="w-100" />
+          <img src={property.image} alt={property.title} className="w-100" style={{ height: '250px', objectFit: 'cover' }} />
         </Link>
         <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`}>
           {property.badge}
         </div>
         <div className="banner-actions">
-          <button className="banner-actions-btn">
+          <button className="banner-actions-btn" aria-label="Location">
             <ion-icon name="location"></ion-icon>
             <address>{property.location}</address>
           </button>
-          <button className="banner-actions-btn">
+          <button className="banner-actions-btn" aria-label="Camera">
             <ion-icon name="camera"></ion-icon>
             <span>4</span>
           </button>
-          <button className="banner-actions-btn">
+          <button className="banner-actions-btn" aria-label="Film">
             <ion-icon name="film"></ion-icon>
             <span>2</span>
           </button>
         </div>
+        <button 
+          onClick={() => toggleWishlist(property)} 
+          style={{ position: 'absolute', top: '15px', right: '15px', background: 'white', border: 'none', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: '10', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}
+        >
+          <ion-icon name={isSaved ? "heart" : "heart-outline"} style={{ fontSize: '24px', color: isSaved ? 'red' : '#333' }}></ion-icon>
+        </button>
       </figure>
 
       <div className="card-content">
         <div className="card-price">
-          <strong>${property.price.toLocaleString()}</strong>/{property.pricePeriod}
+          <strong>₦{property.price.toLocaleString()}</strong>/{property.pricePeriod}
         </div>
         <h3 className="h3 card-title">
           <Link href={`/property/${property._id}`}>{property.title}</Link>
