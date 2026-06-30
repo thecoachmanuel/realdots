@@ -51,7 +51,7 @@ export default async function PropertyDetails({ params }) {
   return (
     <>
       <Header />
-      <main style={{ padding: '120px 0 60px' }}>
+      <main style={{ padding: '80px 0 60px' }}>
         <div className="container">
           <div className="property-details-grid">
             {/* Property Details Section */}
