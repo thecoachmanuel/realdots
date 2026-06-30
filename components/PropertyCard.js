@@ -19,6 +19,13 @@ export default function PropertyCard({ property }) {
     return () => clearInterval(interval);
   }, [allImages.length]);
 
+  const getExcerpt = (text, maxWords) => {
+    if (!text) return '';
+    const words = text.split(' ');
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(' ') + '...';
+  };
+
   return (
     <div className="property-card">
       <figure className="card-banner" style={{ position: 'relative', overflow: 'hidden', height: '250px', display: 'block', width: '100%' }}>
@@ -74,7 +81,7 @@ export default function PropertyCard({ property }) {
         <h3 className="h3 card-title">
           <Link href={`/property/${property._id}`}>{property.title}</Link>
         </h3>
-        <p className="card-text">{property.description}</p>
+        <p className="card-text">{getExcerpt(property.description, 14)}</p>
         <ul className="card-list">
           <li className="card-item">
             <strong>{property.bedrooms}</strong>
