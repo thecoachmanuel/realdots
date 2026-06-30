@@ -14,7 +14,7 @@ export default function ContactPage() {
       <main>
         <section className="property" style={{ padding: '100px 0', background: 'var(--cultured-2)' }}>
           <div className="container">
-            <div style={{ maxWidth: '800px', margin: '0 auto', background: 'var(--white)', padding: '50px', borderRadius: '10px', boxShadow: 'var(--shadow-1)' }}>
+            <div className="responsive-padding" style={{ maxWidth: '800px', margin: '0 auto', background: 'var(--white)', borderRadius: '10px', boxShadow: 'var(--shadow-1)' }}>
               <div style={{ textAlign: 'center', marginBottom: '40px' }}>
                 <h1 className="h2 section-title" style={{ marginBottom: '10px' }}>Contact RealDots</h1>
                 <p className="section-text" style={{ color: 'var(--cadet)' }}>

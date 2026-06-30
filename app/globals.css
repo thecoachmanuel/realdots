@@ -140,9 +140,29 @@ body {
 
 ::-webkit-scrollbar-track { background: var(--white); }
 
-::-webkit-scrollbar-thumb {
-  background: var(--cadet);
-  border-left: 2px solid var(--white);
+/* Responsive Grids */
+.property-details-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+  .property-details-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+  .property-contact-section {
+    padding-left: 40px;
+  }
+}
+
+.responsive-padding {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .responsive-padding {
+    padding: 50px;
+  }
 }
 
 

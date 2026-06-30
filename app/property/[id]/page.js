@@ -57,7 +57,7 @@ export default async function PropertyDetails({ params }) {
       <Header />
       <main style={{ padding: '120px 0 60px' }}>
         <div className="container">
-          <div style={{ display: 'grid', gap: '40px', gridTemplateColumns: '1fr', '@media (minWidth: 992px)': { gridTemplateColumns: '2fr 1fr' } }}>
+          <div className="property-details-grid">
             {/* Property Details Section */}
             <div>
               <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', marginBottom: '30px', display: 'flex', gap: '10px', overflowX: 'auto', scrollSnapType: 'x mandatory' }}>
@@ -121,7 +121,7 @@ export default async function PropertyDetails({ params }) {
             </div>
 
             {/* Contact Form Section */}
-            <div style={{ '@media (minWidth: 992px)': { paddingLeft: '40px' } }}>
+            <div className="property-contact-section">
               <div style={{ background: 'var(--cultured-2)', padding: '30px', borderRadius: '12px' }}>
                 <h3 className="h3" style={{ marginBottom: '20px', textAlign: 'center' }}>Contact RealDots</h3>
                 <p style={{ color: 'var(--cadet)', marginBottom: '30px', textAlign: 'center' }}>
