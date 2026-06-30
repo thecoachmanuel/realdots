@@ -19,13 +19,7 @@ async function getProperties(amenity) {
     await dbConnect();
     const query = amenity ? { amenities: amenity } : {};
     const properties = await Property.find(query).lean();
-    
-    // Convert ObjectId and nested objects to plain strings for Next.js serialization
-    return properties.map(doc => {
-      const property = { ...doc };
-      property._id = property._id.toString();
-      return property;
-    });
+    return JSON.parse(JSON.stringify(properties));
   } catch (error) {
     console.error("Error fetching properties:", error);
     return [];
@@ -36,12 +30,7 @@ async function getBlogs() {
   try {
     await dbConnect();
     const blogs = await BlogModel.find({}).sort({ createdAt: -1 }).limit(3).lean();
-    return blogs.map(doc => {
-      const blog = { ...doc };
-      blog._id = blog._id.toString();
-      blog.createdAt = blog.createdAt.toISOString();
-      return blog;
-    });
+    return JSON.parse(JSON.stringify(blogs));
   } catch (error) {
     console.error("Error fetching blogs:", error);
     return [];

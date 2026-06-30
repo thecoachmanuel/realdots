@@ -32,11 +32,7 @@ async function getSimilarProperties(badge, excludeId) {
       .sort({ createdAt: -1 })
       .limit(3)
       .lean();
-    return similar.map(doc => {
-      const prop = { ...doc };
-      prop._id = prop._id.toString();
-      return prop;
-    });
+    return JSON.parse(JSON.stringify(similar));
   } catch (error) {
     console.error("Error fetching similar properties:", error);
     return [];
@@ -166,7 +162,7 @@ export default async function PropertyDetails({ params }) {
                   View All Properties
                 </Link>
               </div>
-              <ul className="property-list has-scrollbar animate-on-scroll">
+              <ul className="property-list has-scrollbar">
                 {similarProperties.map((prop, idx) => (
                   <li key={prop._id || idx}>
                     <PropertyCard property={prop} />
