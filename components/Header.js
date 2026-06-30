@@ -73,7 +73,7 @@ export default function Header() {
                 <li><Link href="/" className="navbar-link" onClick={closeNav}>Home</Link></li>
                 <li><Link href="/#about" className="navbar-link" onClick={closeNav}>About</Link></li>
                 <li><Link href="/#service" className="navbar-link" onClick={closeNav}>Service</Link></li>
-                <li><Link href="/#property" className="navbar-link" onClick={closeNav}>Property</Link></li>
+                <li><Link href="/properties" className="navbar-link" onClick={closeNav}>Property</Link></li>
                 <li><Link href="/#blog" className="navbar-link" onClick={closeNav}>Blog</Link></li>
                 <li><Link href="/contact" className="navbar-link" onClick={closeNav}>Contact</Link></li>
               </ul>

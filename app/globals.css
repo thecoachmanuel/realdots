@@ -301,7 +301,9 @@ button, a { transition: var(--transition); }
 
 .has-scrollbar > li {
   min-width: 100%;
+  width: 100%;
   scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 @media (min-width: 500px) {
@@ -736,6 +738,7 @@ button, a { transition: var(--transition); }
 .property-card {
   border: 1px solid var(--alice-blue);
   box-shadow: var(--shadow-2);
+  width: 100%;
 }
 
 .property-card .card-banner {
