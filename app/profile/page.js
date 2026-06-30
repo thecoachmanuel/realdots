@@ -149,8 +149,8 @@ export default function ProfilePage() {
                   <input type="text" value={form.name} onChange={e => setForm(p => ({...p, name: e.target.value}))} required style={inputStyle} />
                 </div>
                 <div>
-                  <label style={labelStyle}>Email Address</label>
-                  <input type="email" value={form.email} onChange={e => setForm(p => ({...p, email: e.target.value}))} required style={inputStyle} />
+                  <label style={labelStyle}>Email Address (Non-editable)</label>
+                  <input type="email" value={form.email} disabled style={{ ...inputStyle, background: '#f5f5f5', cursor: 'not-allowed', color: '#888' }} />
                 </div>
                 <div>
                   <label style={labelStyle}>Phone Number</label>

@@ -38,14 +38,7 @@ export async function PUT(request) {
     const user = await User.findById(payload.userId);
     if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
 
-    // Check email uniqueness if changed
-    if (email && email !== user.email) {
-      const existing = await User.findOne({ email });
-      if (existing) return NextResponse.json({ error: 'Email already in use by another account' }, { status: 409 });
-    }
-
     if (name) user.name = name;
-    if (email) user.email = email;
     if (phone !== undefined) user.phone = phone;
     if (avatar !== undefined) user.avatar = avatar;
 
