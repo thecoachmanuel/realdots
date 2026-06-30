@@ -1010,6 +1010,23 @@ button, a { transition: var(--transition); }
 
 .blog { padding-block: var(--section-padding); }
 
+.blog-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .blog-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 .blog-card { box-shadow: var(--shadow-2); }
 
 .blog-card .card-banner {

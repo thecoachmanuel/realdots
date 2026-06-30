@@ -8,11 +8,11 @@ export default function Blog({ blogs = [] }) {
       <div className="container">
         <p className="section-subtitle">News & Blogs</p>
         <h2 className="h2 section-title">Latest News Feeds</h2>
-        <ul className="blog-list has-scrollbar">
+        <ul className="blog-grid">
           {blogs.map(blog => (
             <li key={blog._id}>
               <div className="blog-card">
-                <figure className="card-banner">
+                <figure className="card-banner" style={{ aspectRatio: '16 / 9', overflow: 'hidden' }}>
                   <img src={blog.image || "/images/blog-1.png"} alt={blog.title} className="w-100" />
                 </figure>
                 <div className="blog-content">
