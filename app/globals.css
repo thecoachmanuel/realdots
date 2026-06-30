@@ -236,7 +236,7 @@ button, a { transition: var(--transition); }
   text-transform: uppercase;
   position: absolute;
   top: 15px;
-  right: 15px;
+  left: 15px;
   padding: 4px 10px;
 }
 
