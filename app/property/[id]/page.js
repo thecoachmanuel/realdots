@@ -60,20 +60,34 @@ export default async function PropertyDetails({ params }) {
           <div className="property-details-grid">
             {/* Property Details Section */}
             <div>
-              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', marginBottom: '30px', display: 'flex', gap: '10px', overflowX: 'auto', scrollSnapType: 'x mandatory' }}>
-                {[property.image, ...(property.images || [])].filter(Boolean).map((imgUrl, idx) => (
+              <div style={{ marginBottom: '30px' }}>
+                {/* Main Image */}
+                <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', marginBottom: '15px' }}>
                   <img 
-                    key={idx}
-                    src={imgUrl} 
-                    alt={`${property.title} - Image ${idx + 1}`} 
-                    style={{ minWidth: '100%', height: '400px', display: 'block', objectFit: 'cover', scrollSnapAlign: 'start', borderRadius: '12px' }} 
+                    src={property.image} 
+                    alt={property.title} 
+                    style={{ width: '100%', height: '400px', display: 'block', objectFit: 'cover' }} 
                   />
-                ))}
-                <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`} style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10 }}>
-                  {property.badge}
+                  <div className={`card-badge ${property.badge === 'For Rent' ? 'green' : 'orange'}`} style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10 }}>
+                    {property.badge}
+                  </div>
                 </div>
+
+                {/* Thumbnail Images */}
+                {property.images && property.images.length > 0 && (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px' }}>
+                    {property.images.slice(0, 3).map((imgUrl, idx) => (
+                      <div key={idx} style={{ borderRadius: '8px', overflow: 'hidden', height: '100px' }}>
+                        <img 
+                          src={imgUrl} 
+                          alt={`${property.title} - Thumbnail ${idx + 1}`} 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              <p style={{textAlign: 'center', fontSize: '0.9rem', color: 'var(--cadet)', marginTop: '-20px', marginBottom: '30px'}}>Swipe to view more images</p>
               
               <h1 className="h2" style={{ marginBottom: '15px' }}>{property.title}</h1>
               <p style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--cadet)', marginBottom: '20px' }}>
