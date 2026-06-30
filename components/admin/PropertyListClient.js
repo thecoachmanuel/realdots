@@ -41,7 +41,7 @@ export default function PropertyListClient({ properties }) {
               <tr key={property._id} style={{ borderBottom: '1px solid #ecf0f1' }}>
                 <td style={{ padding: '15px' }}>{property.title}</td>
                 <td style={{ padding: '15px' }}>{property.location}</td>
-                <td style={{ padding: '15px' }}>₦{property.price.toLocaleString()} /{property.pricePeriod}</td>
+                <td style={{ padding: '15px' }}>₦{property.price.toLocaleString()} {property.pricePeriod ? `/${property.pricePeriod}` : ''}</td>
                 <td style={{ padding: '15px' }}>{property.badge}</td>
                 <td style={{ padding: '15px', textAlign: 'right' }}>
                   <Link href={`/admin/properties/${property._id}`} style={{ padding: '6px 12px', background: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '4px', marginRight: '10px' }}>

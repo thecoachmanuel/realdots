@@ -8,7 +8,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
     title: initialData.title || '',
     description: initialData.description || '',
     price: initialData.price || '',
-    pricePeriod: initialData.pricePeriod || 'Month',
+    pricePeriod: initialData.pricePeriod !== undefined ? initialData.pricePeriod : 'Year',
     location: initialData.location || '',
     image: initialData.image || '',
     images: initialData.images ? initialData.images.join(', ') : '',
@@ -101,6 +101,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
         <div style={groupStyle}>
           <label style={labelStyle}>Price Period</label>
           <select name="pricePeriod" value={formData.pricePeriod} onChange={handleChange} style={inputStyle}>
+            <option value="">None (Sales)</option>
             <option value="Month">Month</option>
             <option value="Year">Year</option>
             <option value="One-time">One-time</option>

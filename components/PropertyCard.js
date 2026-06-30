@@ -68,7 +68,7 @@ export default function PropertyCard({ property }) {
 
       <div className="card-content">
         <div className="card-price">
-          <strong>₦{property.price.toLocaleString()}</strong>/{property.pricePeriod}
+          <strong>₦{property.price.toLocaleString()}</strong>{property.pricePeriod ? `/${property.pricePeriod}` : ''}
         </div>
         <h3 className="h3 card-title">
           <Link href={`/property/${property._id}`}>{property.title}</Link>

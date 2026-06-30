@@ -82,7 +82,7 @@ export default async function PropertyDetails({ params }) {
               </p>
 
               <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--orange-soda)', marginBottom: '30px' }}>
-                ₦{property.price.toLocaleString()} <span style={{ fontSize: '1rem', color: 'var(--cadet)', fontWeight: '400' }}>/{property.pricePeriod}</span>
+                ₦{property.price.toLocaleString()} {property.pricePeriod && <span style={{ fontSize: '1rem', color: 'var(--cadet)', fontWeight: '400' }}>/{property.pricePeriod}</span>}
               </div>
 
               <h2 className="h3" style={{ marginBottom: '15px' }}>Property Details</h2>
