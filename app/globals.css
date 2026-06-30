@@ -744,6 +744,23 @@ button, a { transition: var(--transition); }
 
 .property { padding-block: var(--section-padding); }
 
+.property-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .property-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .property-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 .property-card {
   border: 1px solid var(--alice-blue);
   box-shadow: var(--shadow-2);
@@ -1660,7 +1677,6 @@ button, a { transition: var(--transition); }
   .container { max-width: 1200px; }
 
   .has-scrollbar > li { min-width: calc(33.33% - 16.66px); }
-  .property-list.has-scrollbar > li { min-width: calc(50% - 12.5px); }
 
 
 

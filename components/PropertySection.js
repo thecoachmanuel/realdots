@@ -19,7 +19,7 @@ export default function PropertySection({ properties = [], activeFilter = null }
         </div>
 
         {properties.length > 0 ? (
-          <ul className="property-list has-scrollbar">
+          <ul className="property-grid">
             {properties.map((property, idx) => (
               <li key={property._id || idx}>
                 <PropertyCard property={property} />
