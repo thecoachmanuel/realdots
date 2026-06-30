@@ -18,11 +18,7 @@ export default async function EditBlogPage({ params }) {
     notFound();
   }
 
-  const serializedBlog = {
-    ...blog,
-    _id: blog._id.toString(),
-    createdAt: blog.createdAt.toISOString()
-  };
+  const serializedBlog = JSON.parse(JSON.stringify(blog));
 
   return (
     <div>

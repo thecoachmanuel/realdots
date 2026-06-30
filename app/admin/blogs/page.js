@@ -8,11 +8,7 @@ export default async function AdminBlogs() {
   await dbConnect();
   const blogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
   
-  const serializedBlogs = blogs.map(doc => ({
-    ...doc,
-    _id: doc._id.toString(),
-    createdAt: doc.createdAt.toISOString()
-  }));
+  const serializedBlogs = JSON.parse(JSON.stringify(blogs));
 
   return <BlogListClient blogs={serializedBlogs} />;
 }
