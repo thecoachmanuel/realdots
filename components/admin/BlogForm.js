@@ -12,10 +12,37 @@ export default function BlogForm({ initialData = {}, isEdit = false }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    const data = new FormData();
+    data.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data,
+      });
+      const result = await res.json();
+      if (result.success) {
+        setFormData(prev => ({ ...prev, image: result.url }));
+      } else {
+        alert(result.error || 'Upload failed');
+      }
+    } catch (err) {
+      alert('Upload failed');
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -61,7 +88,13 @@ export default function BlogForm({ initialData = {}, isEdit = false }) {
         </div>
         <div style={groupStyle}>
           <label style={labelStyle}>Image URL</label>
-          <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} placeholder="/images/blog-1.png" />
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} placeholder="/images/blog-1.png" />
+            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              {uploadingImage ? 'Uploading...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleFileUpload} />
+            </label>
+          </div>
         </div>
       </div>
 

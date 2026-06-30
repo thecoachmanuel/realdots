@@ -25,6 +25,7 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -46,6 +47,38 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
         return { ...prev, amenities: [...prev.amenities, amenity] };
       }
     });
+  };
+
+  const handleFileUpload = async (e, field) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    const data = new FormData();
+    data.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data,
+      });
+      const result = await res.json();
+      if (result.success) {
+        if (field === 'image') {
+          setFormData(prev => ({ ...prev, image: result.url }));
+        } else if (field === 'images') {
+          const currentImages = formData.images ? formData.images.split(',').map(s => s.trim()).filter(Boolean) : [];
+          currentImages.push(result.url);
+          setFormData(prev => ({ ...prev, images: currentImages.join(', ') }));
+        }
+      } else {
+        alert(result.error || 'Upload failed');
+      }
+    } catch (err) {
+      alert('Upload failed');
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -109,11 +142,23 @@ export default function PropertyForm({ initialData = {}, isEdit = false }) {
         </div>
         <div style={groupStyle}>
           <label style={labelStyle}>Primary Image URL</label>
-          <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} />
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <input type="text" name="image" value={formData.image} onChange={handleChange} required style={inputStyle} />
+            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              {uploadingImage ? 'Uploading...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'image')} />
+            </label>
+          </div>
         </div>
         <div style={groupStyle}>
           <label style={labelStyle}>Extra Images (Comma separated URLs)</label>
-          <input type="text" name="images" value={formData.images} onChange={handleChange} style={inputStyle} placeholder="/images/prop2.jpg, /images/prop3.jpg" />
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <input type="text" name="images" value={formData.images} onChange={handleChange} style={inputStyle} placeholder="/images/prop2.jpg, /images/prop3.jpg" />
+            <label style={{ padding: '10px', background: '#ecf0f1', borderRadius: '4px', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+              {uploadingImage ? 'Uploading...' : 'Upload'}
+              <input type="file" style={{ display: 'none' }} accept="image/*" onChange={(e) => handleFileUpload(e, 'images')} />
+            </label>
+          </div>
         </div>
         <div style={groupStyle}>
           <label style={labelStyle}>Badge</label>

@@ -65,6 +65,11 @@ export default function AdminLayout({ children }) {
                 </Link>
               </li>
               <li>
+                <Link href="/admin/properties" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin/properties' ? '#34495e' : 'transparent' }}>
+                  Manage Properties
+                </Link>
+              </li>
+              <li>
                 <Link href="/admin/properties/new" style={{ display: 'block', padding: '15px 20px', color: 'white', textDecoration: 'none', background: pathname === '/admin/properties/new' ? '#34495e' : 'transparent' }}>
                   Add Property
                 </Link>
