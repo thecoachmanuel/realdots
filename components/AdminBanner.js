@@ -33,12 +33,13 @@ export default function AdminBanner() {
   if (!isAdmin) return null;
 
   return (
-    <Link href="/admin" className="admin-fab" aria-label="Go to Admin Dashboard">
-      <div className="fab-icon">
-        <ion-icon name="options-outline"></ion-icon>
-      </div>
-      <span className="fab-text">Admin Dashboard</span>
-
+    <>
+      <Link href="/admin" className="admin-fab" aria-label="Go to Admin Dashboard">
+        <div className="fab-icon">
+          <ion-icon name="options-outline"></ion-icon>
+        </div>
+        <span className="fab-text">Admin Dashboard</span>
+      </Link>
       <style jsx>{`
         .admin-fab {
           position: fixed;
@@ -107,6 +108,6 @@ export default function AdminBanner() {
           }
         }
       `}</style>
-    </Link>
+    </>
   );
 }
