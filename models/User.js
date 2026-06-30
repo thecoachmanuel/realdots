@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   avatar: { type: String, default: '' },
   phone: { type: String, default: '' },
+  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
   createdAt: { type: Date, default: Date.now },
 });
 
