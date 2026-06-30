@@ -56,7 +56,7 @@ export default async function BlogDetails({ params }) {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+                    <span>{blog.createdAt ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</span>
                   </div>
                 </div>
               </div>

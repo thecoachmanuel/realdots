@@ -13,7 +13,7 @@ export default function Blog({ blogs = [] }) {
             <li key={blog._id}>
               <div className="blog-card">
                 <figure className="card-banner">
-                  <img src={blog.image || "/images/blog-1.png"} alt={blog.title} className="w-100" style={{ height: '250px', objectFit: 'cover' }} />
+                  <img src={blog.image || "/images/blog-1.png"} alt={blog.title} className="w-100" />
                 </figure>
                 <div className="blog-content">
                   <div className="blog-content-top">
@@ -38,7 +38,9 @@ export default function Blog({ blogs = [] }) {
                   <div className="blog-content-bottom">
                     <div className="publish-date">
                       <ion-icon name="calendar"></ion-icon>
-                      <time dateTime={blog.createdAt}>{new Date(blog.createdAt).toLocaleDateString()}</time>
+                      <time dateTime={blog.createdAt}>
+                        {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}
+                      </time>
                     </div>
                     <Link href={`/blog/${blog._id}`} className="read-more-btn">Read More</Link>
                   </div>
