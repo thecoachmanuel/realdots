@@ -115,6 +115,7 @@ ion-icon { pointer-events: none; }
 html {
   font-family: var(--ff-nunito-sans);
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Micro Animations for all cards */
@@ -312,7 +313,7 @@ button, a { transition: var(--transition); }
   transition: 0.3s ease;
 }
 
-.header.active {
+.header.active .header-bottom {
   position: fixed;
   top: 0;
   left: 0;
